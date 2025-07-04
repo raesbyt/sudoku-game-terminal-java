@@ -34,12 +34,14 @@ public class GameController {
                 else 
                     view.showStatusBoard();
             }
+            case 4 -> view.showBoard(service.getBoard());
             case 8 -> {
                 view.sayGoodbye();
                 running = false;
             }
             default -> view.showInvalidOption();
         }
+
     }
     
 }
