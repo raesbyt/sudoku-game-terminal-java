@@ -60,6 +60,30 @@ public class GameService {
                 + "pode ser alterada.\n", col, row);
         }
     }
+    public void clearBoard() {
+        if (!isInvalid()) 
+            return;
+
+        board.reset();
+        System.out.println("🧼 Jogo limpo com sucesso.");
+    }
+
+    public boolean finishGame() {
+        if (!isInvalid()) 
+            return false;
+
+        if (board.gameIsFinished()) {
+            return true;
+        } else {
+            if (board.hasErrors()) {
+                System.out.println("❌ O jogo contém erros. Verifique as "
+                    + "posições incorretas.");
+            } else {
+                System.out.println("⏳ Ainda há espaços para preencher.");
+            }
+            return false;
+        }
+    }
 
     public boolean isInvalid() {
         if (board == null) {

@@ -52,6 +52,29 @@ public class GameController {
                     view.showStatusBoard(GameStatusEnum.NON_STARTED);
             }
             case 4 -> view.showBoard(service.getBoard());
+            case 5 -> {
+                if (!service.isInvalid()) {
+                    view.showStatusBoard(GameStatusEnum.NON_STARTED);
+                } else
+                    view.showStatusBoard(GameStatusEnum.DEFAULT);
+            }
+            case 6 -> {
+                view.clearView();
+                if (!service.isInvalid()) {
+                    view.showStatusBoard(GameStatusEnum.NON_STARTED);
+
+                } else
+                    service.clearBoard();
+            }
+            case 7 -> {
+                view.clearView();
+                if (!service.isInvalid()) {
+                    view.showStatusBoard(GameStatusEnum.NON_STARTED);
+
+                } else if (service.finishGame()) {
+                    view.showSuccess();
+                }
+            }
             case 8 -> {
                 view.sayGoodbye();
                 running = false;

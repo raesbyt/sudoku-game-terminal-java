@@ -118,5 +118,9 @@ public class GameView {
     public void clearView() {   
         clearScreen();  
     }
+
+    public void showSuccess() {
+        System.out.println("🎉 Parabéns! Você concluiu o Sudoku com sucesso!");
+    }
     
 }
