@@ -1,5 +1,6 @@
 package sudoku.controller;
 
+import sudoku.model.GameStatusEnum;
 import sudoku.service.GameService;
 import sudoku.view.GameView;
 
@@ -27,12 +28,28 @@ public class GameController {
     private void handleOption(int option) {
         switch (option) {
             case 1 -> {
-                if (!view.getInitialBoard()) {
-                    view.showStatusBoard();
+                
+                if (!service.isInvalid()) {
+                    view.showStatusBoard(GameStatusEnum.STARTED);
                     service.startGame(view.readInitialBoard());
                 }
                 else 
-                    view.showStatusBoard();
+                    view.showStatusBoard(GameStatusEnum.DEFAULT);
+            }
+            case 2 -> {
+                if (service.isInvalid()) {
+                    service.inputNumber(view.readCol(), view.readRow(), 
+                    view.readValue());
+                    view.clearView();
+                } else
+                    view.showStatusBoard(GameStatusEnum.NON_STARTED);
+            }
+            case 3 -> {
+                if (service.isInvalid()) {
+                    service.removeNumber(view.readCol(), view.readRow());
+                    view.clearView();
+                } else
+                    view.showStatusBoard(GameStatusEnum.NON_STARTED);
             }
             case 4 -> view.showBoard(service.getBoard());
             case 8 -> {

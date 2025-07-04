@@ -13,5 +13,23 @@ public class Board {
     public List<List<Space>> getSpaces() {
         return spaces;
     }
+
+    public boolean changeValue(final int col, final int row, final int value) {
+        Space space = spaces.get(row).get(col);
+        if (space.isFixed()) 
+        return false;
+
+        space.setActual(value);
+        return true;
+    }
+
+    public boolean clearValue(int col, int row) {
+        var space = spaces.get(row).get(col);
+        if (space.isFixed()) 
+            return false;
+
+        space.clearSpace();
+        return true;
+    }
     
 }

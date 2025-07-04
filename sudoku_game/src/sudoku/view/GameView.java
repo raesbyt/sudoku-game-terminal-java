@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import sudoku.model.Board;
+import sudoku.model.GameStatusEnum;
 import sudoku.model.Space;
 
 public class GameView {
@@ -35,8 +36,7 @@ public class GameView {
         input.nextLine();
 
         if (board == null){
-            clearScreen();
-            System.out.println("⚠️ Jogo ainda não iniciado.");
+            showStatusBoard(GameStatusEnum.NON_STARTED);
             return;
         }
         clearScreen();
@@ -73,13 +73,17 @@ public class GameView {
         return args;
     }
 
-    public void showStatusBoard() {
+    public void showStatusBoard(GameStatusEnum value) {
         clearScreen();
-        if (isInitialBoard) {
-            System.out.println("🕹️ Jogo já esta iniciado.");
-            return;
-        } else 
-            System.out.println("✅ Jogo iniciado com sucesso.");
+        
+        switch (value){
+            case GameStatusEnum.NON_STARTED -> 
+                System.out.println("⚠️ O jogo ainda não foi iniciado.");
+            case GameStatusEnum.STARTED -> 
+                System.out.println("✅ Jogo iniciado com sucesso.");
+            default ->
+                System.out.println("🕹️ Jogo já esta iniciado.");
+        }
     }
 
     public void showInvalidOption() {
@@ -94,6 +98,25 @@ public class GameView {
     private void clearScreen() {   
         System.out.print("\033[H\033[2J");   
         System.out.flush();  
+    }
+
+    public int readCol() {
+        System.out.print("Coluna (0-8): ");
+        return input.nextInt();
+    }
+
+    public int readRow() {
+        System.out.print("Linha (0-8): ");
+        return input.nextInt();
+    }
+
+    public int readValue() {
+        System.out.print("Valor (1-9): ");
+        return input.nextInt();
+    }
+
+    public void clearView() {   
+        clearScreen();  
     }
     
 }

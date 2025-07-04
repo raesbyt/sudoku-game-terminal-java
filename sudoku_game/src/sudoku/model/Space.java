@@ -25,5 +25,17 @@ public class Space {
     public boolean isFixed() {
         return fixed;
     }
+
+    public void setActual(Integer actual) {
+        if (!fixed) {
+            this.actual = actual;
+        }
+    }
+
+    public void clearSpace() {
+        if (!fixed) {
+            this.actual = null;
+        }
+    }
     
 }

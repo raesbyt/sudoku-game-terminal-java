@@ -46,5 +46,26 @@ public class GameService {
     public Board getBoard() {
         return board;
     }
+
+    public void inputNumber(int col, int row, int value) {
+        if (!board.changeValue(col, row, value)) {
+            System.out.printf("⚠️ A posição [%d,%d] é fixa e não "
+                + "pode ser alterada.\n", col, row);
+        }
+    }
+
+    public void removeNumber(int col, int row) {
+        if (!board.clearValue(col, row)) {
+            System.out.printf("⚠️ A posição [%d,%d] é fixa e não "
+                + "pode ser alterada.\n", col, row);
+        }
+    }
+
+    public boolean isInvalid() {
+        if (board == null) {
+            return false;
+        }
+        return true;
+    }
     
 }
